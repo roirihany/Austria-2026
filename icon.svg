@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#173f37"/>
+  <circle cx="256" cy="256" r="156" fill="#f4f1e8"/>
+  <path d="M112 342L220 190l55 75 48-66 77 143z" fill="#173f37"/>
+  <rect x="86" y="92" width="340" height="52" rx="26" fill="#d81b2c"/>
+  <rect x="86" y="108" width="340" height="20" fill="#fff"/>
+  <text x="256" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="52" font-weight="700" fill="#173f37">2026</text>
+</svg>

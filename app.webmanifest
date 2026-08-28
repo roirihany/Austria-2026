@@ -1,0 +1,15 @@
+{
+  "name": "אוסטריה 2026",
+  "short_name": "אוסטריה",
+  "description": "המסלול המשפחתי שלנו באוסטריה",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f1e8",
+  "theme_color": "#173f37",
+  "lang": "he",
+  "dir": "rtl",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
