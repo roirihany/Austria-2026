@@ -55,6 +55,14 @@ const day23Alt2=[
 ["14:30","🚡 Starjet 1","עולים ברכבל אל נקודת ההתחלה של Flori’s Erlebnispfad.","Starjet 1 Flachau","💶 רכבל בתשלום / לבדוק כרטיס הטבות",""],
 ["14:45–16:45","🌲 Flori's Erlebnispfad","מסלול משפחתי קליל עם תחנות משחק, משימות והפתעות לילדים לאורך הדרך.","Flori's Erlebnispfad Flachau","🌲 השביל חינם; רכבל בנפרד","https://www.youtube.com/results?search_query=Floris+Erlebnispfad+Flachau"]
 ];
+const day27Alt2=[
+["08:30","🚗 יציאה מ־Felsenhof","יוצאים לכיוון Wolfgangsee ליום של שתי עיירות ושיט על האגם.","Familienhotel Felsenhof Flachau","",""],
+["09:30–11:00","🏘️ St. Gilgen","טיול רגוע בעיירה שעל שפת Wolfgangsee — מרכז העיירה, הטיילת ונוף האגם.","St. Gilgen Wolfgangsee","🆓",""],
+["11:00–12:00","⛴️ שיט על Wolfgangsee","עולים לשיט מ־St. Gilgen לכיוון St. Wolfgang. המעבר בין העיירות הופך לחלק מהחוויה ולא לעוד נסיעה ברכב.","St. Gilgen Schiffsanlegestelle","💶 בתשלום",""],
+["12:00–15:30","🏘️ St. Wolfgang","מטיילים במרכז העיירה ובטיילת, אוכלים צהריים ועוצרים לגלידה או קפה מול האגם.","St. Wolfgang im Salzkammergut","🆓 העיירה; אוכל ושיט בנפרד",""],
+["15:30–16:30","⛴️ חזרה ל־St. Gilgen","שיט חזרה לכיוון הרכב ב־St. Gilgen.","St. Wolfgang Schiffsanlegestelle","💶 בתשלום",""],
+["~17:30","🏨 חזרה ל־Felsenhof","חוזרים למלון לארוחת ערב ומנוחה.","Familienhotel Felsenhof Flachau","",""]
+];
 let current=0;
 const gm=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
 const wz=q=>'https://www.waze.com/ul?q='+encodeURIComponent(q)+'&navigate=yes';
@@ -183,12 +191,19 @@ function dayMap(items){
  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints?'&waypoints='+waypoints:''}&travelmode=driving`;
 }
 function render(){const now=new Date(),todayKey=`${now.getDate()}.${now.getMonth()+1}`;nav.innerHTML=days.map((d,i)=>`<button class="tab ${i===current?'on':''} ${d[0]===todayKey?'todaymark':''}" onclick="current=${i};render()">${d[0]}</button>`).join('');let d=days[current];
+const renderItems=(items,keyPrefix)=>items.map((x,idx)=>{const key=d[0]+'|'+keyPrefix+'|'+idx;return `<div class="item" style="margin-top:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><div class="time">${x[0]}</div><div class="title">${x[1]}</div></div><button class="favbtn ${isFav(key)?'saved':''}" onclick="toggleFav('${key}')" aria-label="מועדף">${isFav(key)?'⭐':'☆'}</button></div><div class="desc">${x[2]}</div>${x[4]?`<div class="price">${x[4]}</div>`:''}<div class="buttons"><a class="btn" target="_blank" href="${gm(x[3])}">📍 Maps</a><a class="btn" target="_blank" href="${wz(x[3])}">🚗 Waze</a>${x[5]?`<a class="btn video" target="_blank" href="${x[5]}">▶️ סרטון קצר</a>`:''}</div></div>`}).join('');
+const optionCard=(label,subtitle,items,recommended=false,reason='')=>`<div class="card altchoice ${recommended?'recommended':''}"><div class="althead"><div><div class="section">${label}</div><div class="desc">${subtitle}</div></div>${recommended?'<span class="altbadge">⭐ מומלץ</span>':''}</div>${reason?`<div class="altreason">💡 ${reason}</div>`:''}<div class="buttons"><a class="btn primary mapday" target="_blank" href="${dayMap(items)}">📍 פתח מפת החלופה — כל התחנות</a></div>${renderItems(items,label)}</div>`;
 if(d[0]==='23.9'){
- const optionCard=(label,items,recommended=false,reason='')=>`<div class="card altchoice ${recommended?'recommended':''}"><div class="althead"><div><div class="section">${label}</div><div class="desc">${recommended?'Hohenwerfen + מופע עופות דורסים + Flori’s':'Hohenwerfen + Wengsee + Flori’s'}</div></div>${recommended?'<span class="altbadge">⭐ מומלץ</span>':''}</div>${reason?`<div class="altreason">💡 ${reason}</div>`:''}<div class="buttons"><a class="btn primary mapday" target="_blank" href="${dayMap(items)}">📍 פתח מפת החלופה — כל התחנות</a></div>${items.map((x,idx)=>{const key=d[0]+'|'+(recommended?'b':'a')+'|'+idx;return `<div class="item" style="margin-top:10px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div><div class="time">${x[0]}</div><div class="title">${x[1]}</div></div><button class="favbtn ${isFav(key)?'saved':''}" onclick="toggleFav('${key}')" aria-label="מועדף">${isFav(key)?'⭐':'☆'}</button></div><div class="desc">${x[2]}</div>${x[4]?`<div class="price">${x[4]}</div>`:''}<div class="buttons"><a class="btn" target="_blank" href="${gm(x[3])}">📍 Maps</a><a class="btn" target="_blank" href="${wz(x[3])}">🚗 Waze</a>${x[5]?`<a class="btn video" target="_blank" href="${x[5]}">▶️ סרטון קצר</a>`:''}</div></div>`}).join('')}</div>`;
  trip.innerHTML=`<div class="card hero"><h2>${d[1]} ${d[0]} — שתי חלופות ליום הזה</h2><div class="altintro">בחרו <b>חלופה אחת</b>. אלו שני מסלולים חלופיים לאותו יום — לא שתי נקודות שצריך לבצע ברצף.</div></div>
  <div class="card alert"><b>🎒 לפני היציאה</b><div class="desc">Lunch Box מהמלון • מים • עגלה/מנשא • מעילים • Power bank • כרטיסים שהוזמנו מראש.</div></div>
- ${optionCard('חלופה 1',d[3],false)}
- ${optionCard('חלופה 2',day23Alt2,true,'בסוף ספטמבר מתחם הרחצה/הפנאי של Wengsee אינו פעיל, ולכן עדיף לתת יותר זמן ל־Hohenwerfen, למופע עופות הדורסים ול־Flori’s. את Wolfgangsee / St. Wolfgang / St. Gilgen עדיף לשמור ליום נפרד.')}
+ ${optionCard('חלופה 1','Hohenwerfen + Wengsee + Flori’s',d[3],false)}
+ ${optionCard('חלופה 2','Hohenwerfen + מופע עופות דורסים + Flori’s',day23Alt2,true,'בסוף ספטמבר מתחם הרחצה/הפנאי של Wengsee אינו פעיל, ולכן עדיף לתת יותר זמן ל־Hohenwerfen, למופע עופות הדורסים ול־Flori’s. את Wolfgangsee / St. Wolfgang / St. Gilgen עדיף לשמור ליום נפרד.')}
+ ${food(d[0])}`;
+}else if(d[0]==='27.9'){
+ trip.innerHTML=`<div class="card hero"><h2>${d[1]} ${d[0]} — שתי חלופות ליום הזה</h2><div class="altintro">בחרו <b>חלופה אחת</b> ליום ראשון.</div></div>
+ <div class="card alert"><b>🎒 לפני היציאה</b><div class="desc">Lunch Box מהמלון • מים • עגלה/מנשא • מעילים • Power bank.</div></div>
+ ${optionCard('חלופה 1','FUNSPACE + Lucky Flitzer + מלון',d[3],false)}
+ ${optionCard('חלופה 2','St. Gilgen + שיט ב־Wolfgangsee + St. Wolfgang',day27Alt2,false)}
  ${food(d[0])}`;
 }else{
  trip.innerHTML=`<div class="card hero"><h2>${d[1]} ${d[0]} — ${d[2]}</h2>${travel[d[0]]?`<div class="travel">🚗 ${travel[d[0]]}</div>`:''}<div class="buttons" style="margin-top:9px"><a class="btn primary mapday" target="_blank" href="${dayMap(d[3])}">📍 פתח מפת יום מלאה — כל התחנות</a></div></div>
