@@ -64,10 +64,12 @@ const day27Alt2=[
 ["~17:30","🏨 חזרה ל־Felsenhof","חוזרים למלון לארוחת ערב ומנוחה.","Familienhotel Felsenhof Flachau","",""]
 ];
 const day28Alt2=[
-["09:00","🚗 יציאה מ־Felsenhof","יוצאים לכיוון Golling ליום טבע רגוע באזור Bluntautal.","Familienhotel Felsenhof Flachau","",""],
-["10:00–12:00","🏞️ Bluntautal + Bluntausee","הליכה רגועה באזור האגמים הצלולים של Bluntautal. עוצרים לתמונות, נוף וזמן חופשי עם הילדים בלי למהר.","Parkplatz Bluntautal Golling","🅿️ חניה בתשלום","https://www.youtube.com/results?search_query=Bluntautal+Bluntausee+Golling"],
+["10:00","🚗 יציאה מ־Felsenhof","יוצאים לכיוון Golling ליום טבע רגוע באזור Bluntautal.","Familienhotel Felsenhof Flachau","",""],
+["10:45–12:45","🏞️ Bluntautal + Bluntausee","הליכה רגועה באזור האגמים הצלולים של Bluntautal. עוצרים לתמונות, נוף וזמן חופשי עם הילדים בלי למהר.","Parkplatz Bluntautal Golling","🅿️ חניה בתשלום","https://www.youtube.com/results?search_query=Bluntautal+Bluntausee+Golling"],
 ["12:15–13:45","🍺 Landgasthof Torrenerhof — בירה ונשנושים","עצירה נינוחה לבירה, משהו אוסטרי לנשנש וארוחה קלה לפני המפל. Torrenerhof פתוח גם ביום שני ונמצא ממש באזור Torren.","Landgasthof Torrenerhof Golling","💶 לפי הזמנה",""],
-["14:00–15:30","💦 Golling Waterfall","ממשיכים למפל Golling המרשים. הולכים בקצב שמתאים לילדים; אין חובה להגיע עד המקור העליון. שימו לב: המסלול אינו מתאים לעגלת תינוק, אז כאן עדיף מנשא לתאומים.","Gollinger Wasserfall","💶 כניסה בתשלום • חניה בתשלום","https://www.youtube.com/results?search_query=Golling+Waterfall+Austria"],
+["14:30","🚗 נסיעה ל־Jägersee","אחרי הבירה יוצאים לכיוון Kleinarl ו־Jägersee. הנסיעה עצמה יפה ועוברת בעמק לכיוון האגם.","Jägersee Kleinarl","",""],
+["15:15–16:30","🏞️ Jägersee","אגם הרים קטן וצלול ליד Kleinarl. עושים סיבוב רגוע סביב האגם — כ־45 דקות וכמעט ללא הפרשי גובה. המסלול מתאים לעגלות, כך שאפשר לקחת את התאומים בנוחות.","Jägersee Kleinarl","🆓 • חניה חינם ליד Gasthaus Jägersee","https://www.youtube.com/results?search_query=Jagersee+Kleinarl+Austria"],
+["16:30–16:50","☕ אופציה: Gasthaus Jägersee","אם מתחשק, עוצרים לקפה/שתייה מול האגם לפני החזרה למלון.","Gasthaus Jägersee Kleinarl","💶 לפי הזמנה",""],
 ["15:30","🚗 חזרה לכיוון Flachau","אחרי המפל מסיימים את יום הטבע בלי להוסיף עוד אטרקציות בדרך.","Familienhotel Felsenhof Flachau","",""],
 ["~16:30–17:00","🏨 חזרה ל־Felsenhof","בריכה, מנוחה וארוחת ערב במלון. FUNSPACE ו־Lucky Flitzer נשארים ליום אחר.","Familienhotel Felsenhof Flachau","כלול באירוח",""]
 ];
@@ -217,7 +219,7 @@ if(d[0]==='23.9'){
  trip.innerHTML=`<div class="card hero"><h2>${d[1]} ${d[0]} — שתי חלופות ליום הזה</h2><div class="altintro">בחרו <b>חלופה אחת</b>: יום זלצבורג המקורי או יום טבע רגוע באזור Golling.</div></div>
  <div class="card alert"><b>🎒 לפני היציאה</b><div class="desc">מים • מעילים • Power bank • מנשא לתאומים למפל (המסלול אינו מתאים לעגלה).</div></div>
  ${optionCard('חלופה 1','Mozart’s Birthplace + Hellbrunn + Haus der Natur',d[3],false)}
- ${optionCard('חלופה 2','Bluntautal + בירה ונשנושים + Golling Waterfall',day28Alt2,true,'יום טבע רגוע ומרוכז באזור Golling: אגם בבוקר, עצירת בירה ונשנושים ב־Torrenerhof, מפל Golling וחזרה למלון — בלי FUNSPACE ובלי Lucky Flitzer.')}
+ ${optionCard('חלופה 2','Bluntautal + בירה ונשנושים + Jägersee',day28Alt2,true,'יום טבע רגוע: Bluntausee בבוקר, בירה ונשנושים ב־Torrenerhof, ואז Jägersee — מסלול קל שמתאים לעגלות — וחזרה למלון. בלי FUNSPACE ובלי Lucky Flitzer.')}
  ${food(d[0])}`;
 }else{
  trip.innerHTML=`<div class="card hero"><h2>${d[1]} ${d[0]} — ${d[2]}</h2>${travel[d[0]]?`<div class="travel">🚗 ${travel[d[0]]}</div>`:''}<div class="buttons" style="margin-top:9px"><a class="btn primary mapday" target="_blank" href="${dayMap(d[3])}">📍 פתח מפת יום מלאה — כל התחנות</a></div></div>
